@@ -21,17 +21,106 @@ static char next_square(game_state_t* state, unsigned int snum);
 static void update_tail(game_state_t* state, unsigned int snum);
 static void update_head(game_state_t* state, unsigned int snum);
 
+
+
+
 /* Tarea 1 */
-game_state_t* create_default_state() {
+game_state_t* create_default_state()
+{
   // TODO: Implementar esta funcion.
-  return NULL;
+
+  //PASO 1: reservar espacio para el estado, llámese "predeterminado" y asegurarse que se reserve correctamente
+  //Detalle: guardar espacio suficient, no solo para tablero, sino para todos los campos de "game_state_t".
+  game_state_t* predeterminado = (game_state_t*) malloc(sizeof(game_state_t));
+  if (!predeterminado)
+  {
+    return NULL;
+  }
+
+  //PASO 2: inicializar valores sencillos
+  predeterminado->num_rows = 18;
+  predeterminado->num_snakes = 1;
+  
+
+
+  //PASO 3: definir el tablero predeterminado
+  //Por cada fila, se reserva espacio en memoria y se asignan los caracteres con un "strcpy"
+
+  predeterminado->board = (char**) malloc(18 * sizeof(char *));
+    if (!predeterminado->board)
+    {
+      free(predeterminado);
+      return NULL;
+    }
+
+  char* pred_tablero[18] =
+  {
+    "####################",
+    "#                  #",
+    "# d>D    *         #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "#                  #",
+    "####################"
+  };
+
+  for (int i = 0; i < 18; i ++)
+  {
+    predeterminado->board[i] = (char*) malloc(21 * sizeof(char));
+    if (!predeterminado->board[i])
+    {
+      for (int j = 0; j < i; j++)
+      free(predeterminado->board[j]);
+      free(predeterminado->board);
+      free(predeterminado);
+      return NULL;
+    }
+
+
+      strcpy(predeterminado->board[i], pred_tablero[i]);
+  }
+
+  //PASO 4: definir la serpiente
+  predeterminado->snakes = (snake_t* ) malloc(sizeof(snake_t));
+  if (!predeterminado->snakes)
+  {
+    for (int i = 0; i < 18; i++)
+      {
+        free(predeterminado->board[i]);
+      }
+    
+      free(predeterminado->board);
+      free(predeterminado);
+      return NULL;
+  }
+
+  predeterminado->snakes->head_col = 4;
+  predeterminado->snakes->head_row = 2;
+
+  predeterminado->snakes->tail_col = 2;
+  predeterminado->snakes->tail_row = 2;
+
+  predeterminado->snakes->live = true;
+
+  return predeterminado;
 }
 
 
 /* Tarea 2 */
-void free_state(game_state_t* state) {
-  // TODO: Implementar esta funcion.
-  return;
+void free_state(game_state_t* state) 
+{
+  
 }
 
 
