@@ -326,6 +326,22 @@ static char next_square(game_state_t* state, unsigned int snum) {
 */
 static void update_head(game_state_t* state, unsigned int snum) {
   // TODO: Implementar esta funcion.
+  char cabeza = state->board[state->snakes[snum].head_row][state->snakes[snum].head_col];
+  unsigned int fila = 0, columna = 0;
+  if(cabeza == 'W' || cabeza == 'S' || cabeza == 'A' || cabeza == 'D'){
+  	if(cabeza == 'W' || cabeza == 'S'){
+	  	fila = get_next_row(state->snakes[snum].head_row, cabeza);
+	  	columna = state->snakes[snum].head_col;
+	}else if(cabeza == 'A' || cabeza == 'D'){
+	  	fila = state->snakes[snum].head_row;
+	  	columna = get_next_col(state->snakes[snum].head_col, cabeza);
+	}
+	set_board_at(state, fila, columna, cabeza);
+	set_board_at(state, state->snakes[snum].head_row, state->snakes[snum].head_col, head_to_body(cabeza));
+	
+	state->snakes[snum].head_row = fila;
+	state->snakes[snum].head_col = columna;
+  }
   return;
 }
 
