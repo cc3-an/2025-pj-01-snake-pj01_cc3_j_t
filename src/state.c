@@ -120,7 +120,13 @@ game_state_t* create_default_state()
 /* Tarea 2 */
 void free_state(game_state_t* state) 
 {
-  
+  if(state == NULL) return;
+  for(int i = 0; i < state->num_rows; i++){
+  	free(state->board[i]);
+  }
+  free(state->board);
+  free(state->snakes);
+  free(state);
 }
 
 
