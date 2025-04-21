@@ -384,6 +384,20 @@ static void update_tail(game_state_t* state, unsigned int snum) {
 /* Tarea 4.5 */
 void update_state(game_state_t* state, int (*add_food)(game_state_t* state)) {
   // TODO: Implementar esta funcion.
+  for(int i = 0; i < state->num_snakes; i++){
+  	if(next_square(state, i) == 'W' || next_square(state, i) == 'A' || next_square(state, i) == 'S' || next_square(state, i) == 'D' || next_square(state, i) == 'w' || next_square(state, i) == 'a' || next_square(state, i) == 's' || next_square(state, i) == 'd' || next_square(state, i) == '^' || next_square(state, i) == '<' || next_square(state, i) == 'v' || next_square(state, i) == '>' || next_square(state, i) == '#'){
+  		set_board_at(state, state->snakes[i].head_row, state->snakes[i].head_col, 'x');
+		state->snakes[i].live = false;	
+	}else if(next_square(state, i) == '*'){
+	  	update_head(state, i);
+	  	add_food(state);
+	}else if(next_square(state, i) == ' '){
+	  	update_head(state, i);
+	  	update_tail(state, i);
+	}
+  }
+  
+  
   return;
 }
 
