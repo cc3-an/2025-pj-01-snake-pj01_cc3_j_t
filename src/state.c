@@ -359,6 +359,25 @@ static void update_head(game_state_t* state, unsigned int snum) {
 */
 static void update_tail(game_state_t* state, unsigned int snum) {
   // TODO: Implementar esta funcion.
+  unsigned int fila = state->snakes[snum].tail_row;
+  unsigned int columna = state->snakes[snum].tail_col;
+  if(get_board_at(state, fila, columna) == 'w'){
+  	set_board_at(state, fila-1, columna, body_to_tail(get_board_at(state, fila-1, columna)));
+  	set_board_at(state, fila, columna, ' ');
+  	state->snakes[snum].tail_row = fila-1;
+  }else if(get_board_at(state, fila, columna) == 'a'){
+  	set_board_at(state, fila, columna-1, body_to_tail(get_board_at(state, fila, columna-1)));
+  	set_board_at(state, fila, columna, ' ');
+  	state->snakes[snum].tail_col = columna-1;
+  }else if(get_board_at(state, fila, columna) == 's'){
+  	set_board_at(state, fila+1, columna, body_to_tail(get_board_at(state, fila+1, columna)));
+  	set_board_at(state, fila, columna, ' ');
+  	state->snakes[snum].tail_row = fila+1;
+  }else if(get_board_at(state, fila, columna) == 'd'){
+  	set_board_at(state, fila, columna+1, body_to_tail(get_board_at(state, fila, columna+1)));
+  	set_board_at(state, fila, columna, ' ');
+  	state->snakes[snum].tail_col = columna+1;
+  }
   return;
 }
 
