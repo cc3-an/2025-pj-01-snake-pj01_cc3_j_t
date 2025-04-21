@@ -107,39 +107,100 @@ bool test_is_vowel() {
 
 /* Task 4.1 */
 
-bool test_is_tail() {
+bool test_is_tail()
+{
   // TODO: Implementar esta funcion
-  return true;
+  if (assert_true("is_tail('w')", is_tail('w'))) return true;
+  if (assert_true("is_tail('a')", is_tail('a'))) return true;
+  if (assert_true("is_tail('s')", is_tail('s'))) return true;
+  if (assert_true("is_tail('d')", is_tail('d'))) return true;
+  if (assert_true("is_tail('x')", is_tail('x'))) return true;
+  if (assert_true("is_tail('A')", is_tail('A'))) return true;
+
+  return false;
 }
 
-bool test_is_head() {
+bool test_is_head()
+{
   // TODO: Implementar esta funcion
-  return true;
+  if (assert_equals_char("body_to_tail('^')", 'w', body_to_tail('^'))) return true;
+  if (assert_equals_char("body_to_tail('<')", 'a', body_to_tail('<'))) return true;
+  if (assert_equals_char("body_to_tail('v')", 's', body_to_tail('v'))) return true;
+  if (assert_equals_char("body_to_tail('>')", 'd', body_to_tail('>'))) return true;
+  if (assert_equals_char("body_to_tail('?')", '?', body_to_tail('?'))) return true;
+
+  return false;
 }
 
-bool test_is_snake() {
+bool test_is_snake()
+{
   // TODO: Implementar esta funcion
-  return true;
+  char* snake_chars = "wasd^<v>WASDx";
+  for (int i = 0; i < strlen(snake_chars); i++)
+  {
+    if (assert_true("is_snake()", is_snake(snake_chars[i]))) return true;
+  }
+
+  if (assert_false("is_snake('#')", is_snake('#'))) return true;
+  if (assert_false("is_snake('*')", is_snake('*'))) return true;
+
+  return false;
 }
 
-bool test_body_to_tail() {
+bool test_body_to_tail()
+{
   // TODO: Implementar esta funcion
-  return true;
+  if (assert_equals_char("body_to_tail('^')", 'w', body_to_tail('^'))) return true;
+  if (assert_equals_char("body_to_tail('<')", 'a', body_to_tail('<'))) return true;
+  if (assert_equals_char("body_to_tail('v')", 's', body_to_tail('v'))) return true;
+  if (assert_equals_char("body_to_tail('>')", 'd', body_to_tail('>'))) return true;
+  if (assert_equals_char("body_to_tail('?')", '?', body_to_tail('?'))) return true;
+
+  return false;
 }
 
-bool test_head_to_body() {
+bool test_head_to_body()
+{
   // TODO: Implement this function.
-  return true;
+  if (assert_equals_char("head_to_body('W')", '^', head_to_body('W'))) return true;
+  if (assert_equals_char("head_to_body('A')", '<', head_to_body('A'))) return true;
+  if (assert_equals_char("head_to_body('S')", 'v', head_to_body('S'))) return true;
+  if (assert_equals_char("head_to_body('D')", '>', head_to_body('D'))) return true;
+  if (assert_equals_char("head_to_body('?')", '?', head_to_body('?'))) return true;
+
+  return false;
 }
 
-bool test_get_next_row() {
+bool test_get_next_row()
+{
   // TODO: Implement this function.
-  return true;
+  if (assert_equals_unsigned_int("get_next_row('v')", 6, get_next_row(5, 'v'))) return true;
+  if (assert_equals_unsigned_int("get_next_row('s')", 6, get_next_row(5, 's'))) return true;
+  if (assert_equals_unsigned_int("get_next_row('S')", 6, get_next_row(5, 'S'))) return true;
+
+  if (assert_equals_unsigned_int("get_next_row('^')", 4, get_next_row(5, '^'))) return true;
+  if (assert_equals_unsigned_int("get_next_row('w')", 4, get_next_row(5, 'w'))) return true;
+  if (assert_equals_unsigned_int("get_next_row('W')", 4, get_next_row(5, 'W'))) return true;
+
+  if (assert_equals_unsigned_int("get_next_row('>')", 5, get_next_row(5, '>'))) return true;
+
+  return false;
 }
 
-bool test_get_next_col() {
+bool test_get_next_col()
+{
   // TODO: Implementar esta funcion
-  return true;
+  if (assert_equals_unsigned_int("get_next_col('>')", 6, get_next_col(5, '>'))) return true;
+  if (assert_equals_unsigned_int("get_next_col('d')", 6, get_next_col(5, 'd'))) return true;
+  if (assert_equals_unsigned_int("get_next_col('D')", 6, get_next_col(5, 'D'))) return true;
+
+  if (assert_equals_unsigned_int("get_next_col('<')", 4, get_next_col(5, '<'))) return true;
+  if (assert_equals_unsigned_int("get_next_col('a')", 4, get_next_col(5, 'a'))) return true;
+  if (assert_equals_unsigned_int("get_next_col('A')", 4, get_next_col(5, 'A'))) return true;
+
+  if (assert_equals_unsigned_int("get_next_col('^')", 5, get_next_col(5, '^'))) return true;
+
+  return false;
 }
 
 bool test_customs() {
